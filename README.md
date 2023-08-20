@@ -1,3 +1,4 @@
+[![codecov](https://codecov.io/gh/olivenbarcelon/jest-cc/graph/badge.svg?token=HJ7Q39AXIZ)](https://codecov.io/gh/olivenbarcelon/jest-cc)
 # jest-cc
 Jest Crash Course
 
