@@ -1,0 +1,45 @@
+name: Running Code Coverage
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [14.x, 16.x, 18.x, 19.x, 20.x]
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+        # with:
+          # -depth: 2
+          # persist-credentials: false
+
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          # cache: yarn
+
+      - name: Install Dependencies
+        working-directory: project
+        run: yarn --immutable
+
+      - name: Run tests
+        working-directory: project
+        # run: yarn run jest --coverage
+        run: yarn run test
+
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v3
+        env:
+          # CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+          token: ${{ secrets.CODECOV_TOKEN }}
+          # files: ./projects/coverage/coverage.xml
+
+      # - name: Upload coverage to Codecov
+      #   uses: codecov/codecov-action@v1
+      #   with:
+      #       token: ${{ secrets.YOUR_SECRET_TOKEN }}
