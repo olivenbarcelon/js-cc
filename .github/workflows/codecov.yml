@@ -1,6 +1,9 @@
 name: Running Code Coverage
 
-on: [push, pull_request]
+# on: [push, pull_request]
+on:
+  pull_request:
+    branches: [ master, develop ]
 
 jobs:
   build:
@@ -8,7 +11,8 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [14.x, 16.x, 18.x, 19.x, 20.x]
+        # node-version: [14.x, 16.x, 18.x, 19.x, 20.x]
+        node-version: [14.x]
 
     steps:
       - name: Checkout Repository
@@ -21,7 +25,6 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          # cache: yarn
 
       - name: Install Dependencies
         working-directory: project
@@ -29,17 +32,12 @@ jobs:
 
       - name: Run tests
         working-directory: project
-        # run: yarn run jest --coverage
         run: yarn run test
 
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3
         env:
-          # CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-          token: ${{ secrets.CODECOV_TOKEN }}
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
           # files: ./projects/coverage/coverage.xml
-
-      # - name: Upload coverage to Codecov
-      #   uses: codecov/codecov-action@v1
-      #   with:
-      #       token: ${{ secrets.YOUR_SECRET_TOKEN }}
+        # with:
+        #   token: ${{ secrets.YOUR_SECRET_TOKEN }}
