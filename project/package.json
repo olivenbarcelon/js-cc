@@ -1,9 +1,9 @@
 {
-  "name": "jest-cc",
+  "name": "js-cc",
   "version": "1.0.0",
   "description": "Jest Crash Course",
   "main": "index.js",
-  "repository": "https://github.com/olivenbarcelon/jest-cc.git",
+  "repository": "https://github.com/olivenbarcelon/js-cc.git",
   "author": "Oliven C. Barcelon",
   "license": "MIT",
   "devDependencies": {
