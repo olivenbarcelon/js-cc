@@ -4,8 +4,9 @@
 Javascript Crash Course
 
 **Setup Project**
-* yarn init
-* yarn test
+<!-- * yarn init -->
+* yarn
+* yarn run test
 
 **References**
 * [Yarn](https://yarnpkg.com)
